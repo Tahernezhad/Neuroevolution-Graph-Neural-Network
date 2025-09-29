@@ -105,12 +105,7 @@ def replay_best_gnn(run_dir: str, devo_steps: int):
     # 6. Main Developmental Loop
     print("Starting developmental replay...")
     for step in range(1, devo_steps + 1):
-        # The GNN's evaluation function from network.py contains the core logic
-        # We just need to call it on our loaded network.
-        # Note: We are re-using the `evaluate` method here for consistency,
-        # but only capturing the final state of the organism after one step.
 
-        # It performs one step of development using the GNN's brain.
         e_pred, n_pred = best_network.model(org.get_graph_data(device='cpu'))
         e_pred_undirected = e_pred[:n_edges].cpu().numpy()
         n_pred_np = n_pred.cpu().numpy()
@@ -118,18 +113,15 @@ def replay_best_gnn(run_dir: str, devo_steps: int):
         org.update_with_cell_outputs(e_pred_undirected, n_pred_np, step)
         org.sense_environment(env)
 
-        # Get the new fitness and store component values
         current_fitness_state: Fitness = org.get_fitness(initial_fitness.components)
         sv = current_fitness_state.components
         E_hist.append(sv[0])
         V_hist.append(sv[1])
         C_hist.append(current_fitness_state.score)
 
-        # Store history
         node_hist[step, :, :] = org.nodes
         area_hist[step, :] = org.cs_areas
 
-        # Save a frame for the GIF
         caption = f"Step {step} | E={sv[0]:.3e}, V={sv[1]:.2f}, Cost={current_fitness_state.score:.3f}"
         save_frame(step, caption)
         print(f"  ... Step {step} complete.")
