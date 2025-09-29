@@ -1,11 +1,11 @@
 # Neuroevolution for Graph Neural Networks (Truss Design)
 
-Evolutionary optimisation of Graph Neural Networks (**GCN/GAT/GraphSAGE**, PyTorch‑Geometric) for **truss/structural design**.  
-A genetic algorithm (μ+λ) evolves network weights using **Simulated Binary Crossover (SBX)** and **Deb’s polynomial mutation**, while a GNN controller iteratively “develops” a seed truss by adjusting **node coordinates** and **member cross‑sectional areas** under fixed loads/reactions.
+Evolutionary optimisation of Graph Neural Networks (**GCN/GAT/GraphSAGE**, PyTorch‑Geometric) for **truss design**.  
+A genetic algorithm (GA) evolves network weights using **Simulated Binary Crossover (SBX)** and **Polynomial Mutation (PM)**, while a GNN controller iteratively “develops” a seed truss by adjusting **node coordinates** and **member cross‑sectional areas** under fixed loads/reactions.
 
 - **Backbones:** GCN, GAT, GraphSAGE (PyTorch‑Geometric).
-- **Physics loop:** strain energy, volume, stresses computed per step; fitness = normalised strain energy + volume.
-- **Operators:** per‑weight SBX (vectorised) + bound‑aware polynomial mutation.
+- **Physics Loop:** strain energy, volume, stresses computed per step; fitness = normalised strain energy + volume.
+- **EA Operators:** SBX + PM.
 - **Provenance:** Environment/organism logic adapted from the **RIED** project; this repo adds PyG models (GCN/GAT/SAGE), vectorised EA ops, and extra reward/visualisation utilities.
 
 > Reference codebase (RIED EvoDevo): https://gitlab.com/riedproject/gnn-evodevo  
@@ -30,8 +30,8 @@ Training writes a timestamped folder under `./data/` with:
 ├─ main.py                        # run evolutionary training
 ├─ replay.py                      # visualise best controller; export GIF/CSVs/plots
 ├─ src/
-│  ├─ genetic_algorithm.py        # (μ+λ) GA + tournament selection
-│  ├─ ea_utils.py                 # SBX + Deb mutation (vectorised, bound‑aware)
+│  ├─ genetic_algorithm.py        # GA + tournament selection
+│  ├─ ea_utils.py                 # SBX + PM (vectorised, bound‑aware)
 │  ├─ gnn_model.py                # GCN/GAT/GraphSAGE heads (node Δ, edge Δ)
 │  ├─ network.py                  # wrapper: init, eval loop per organism
 │  ├─ organism.py                 # truss state, graph features, fitness, updates
@@ -64,11 +64,11 @@ Defaults live in `main.py`:
 ```python
 model_name       = "gcn"     # "gcn" | "gat" | "sage"
 hidden_dim       = 120
-num_layers       = 2
+num_layers       = 3
 dropout_rate     = 0.1
 
-num_generations  = 20
-population_size  = 100
+num_generations  = 150
+population_size  = 512
 num_devo_steps   = 10
 
 crossover_prob   = 0.9
@@ -101,22 +101,12 @@ python replay.py
 ## Acknowledgements
 
 Environment modelling concepts and an earlier NumPy‑based GCN originate from the **RIED** project:  
-**RIED → EvoDevo GNN (GitLab): https://gitlab.com/riedproject/gnn-evodevo**
+**RIED → EvoDevo GNN (GitLab): https://gitlab.com/riedproject**
 
 This repository re‑implements the controller in PyTorch‑Geometric (GCN/GAT/GraphSAGE), adds vectorised SBX/Mutation, and expands logging/visualisation for truss development.
 
----
-
-## Citation
-
-If this code contributes to your research or prototypes, please cite the RIED EvoDevo line and this repository. (BibTeX to be added upon publication.)
-
----
-
-## License
-
-Add your chosen license (e.g., MIT).
-
+- [PyTorch](https://pytorch.org/)
+- [TorchGeometric](https://pytorch-geometric.readthedocs.io/en/latest/)
 ---
 
 ## Troubleshooting
