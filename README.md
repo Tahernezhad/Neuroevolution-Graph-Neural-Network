@@ -3,12 +3,12 @@
 Evolutionary optimisation of Graph Neural Networks (**GCN/GAT/GraphSAGE**, PyTorch‑Geometric) for **truss design**.  
 A genetic algorithm (GA) evolves network weights using **Simulated Binary Crossover (SBX)** and **Polynomial Mutation (PM)**, while a GNN controller iteratively “develops” a seed truss by adjusting **node coordinates** and **member cross‑sectional areas** under fixed loads/reactions.
 
-- **Backbones:** GCN, GAT, GraphSAGE (PyTorch‑Geometric).
+- **Backbones:** GCN (Graph Convolutional Network), GAT (Graph Attention Network), GraphSAGE (PyTorch‑Geometric).
 - **Physics Loop:** strain energy, volume, stresses computed per step; fitness = normalised strain energy + volume.
 - **EA Operators:** SBX + PM.
 - **Provenance:** Environment/organism logic adapted from the **RIED** project; this repo adds PyG models (GCN/GAT/SAGE), vectorised EA ops, and extra reward/visualisation utilities.
 
-> Reference codebase (RIED EvoDevo): https://gitlab.com/riedproject/gnn-evodevo  
+> Reference codebase (RIED EvoDevo): https://gitlab.com/riedproject  
 > Earlier NumPy GCN ideas were tested there; this repo re‑implements the controller in PyTorch‑Geometric and extends it.
 
 ---
