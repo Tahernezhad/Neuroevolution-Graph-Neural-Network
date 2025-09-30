@@ -8,8 +8,9 @@ A genetic algorithm (GA) evolves network weights using **Simulated Binary Crosso
 - **EA Operators:** SBX + PM.
 - **Provenance:** Environment/organism logic adapted from the **RIED** project; this repo adds PyG models (GCN/GAT/SAGE), vectorised EA ops, and extra reward/visualisation utilities.
 
-> Reference codebase (RIED EvoDevo): https://gitlab.com/riedproject  
-> Earlier NumPy GCN ideas were tested there; this repo re‑implements the controller in PyTorch‑Geometric and extends it.
+> Reference codebase (RIED EvoDevo): https://gitlab.com/riedproject 
+> 
+> Earlier NumPy GCN ideas were tested there. My repo re‑implements the GNN controller in PyTorch‑Geometric and extends it.
 
 ---
 
