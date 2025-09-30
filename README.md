@@ -102,8 +102,7 @@ python replay.py
 
 
 
-This repository re‑implements the controller in PyTorch‑Geometric (GCN/GAT/GraphSAGE), adds vectorised SBX/Mutation, and expands logging/visualisation for truss development. Environment modelling concepts and an earlier NumPy‑based GCN originate from the **RIED** project:  
-RIED → EvoDevo GNN (GitLab): https://gitlab.com/riedproject
+This repository re‑implements the controller in PyTorch‑Geometric (GCN/GAT/GraphSAGE), adds vectorised SBX/Mutation, and expands logging/visualisation for truss development. Environment modelling concepts and an earlier NumPy‑based GCN originate from the **RIED** project (GitLab): https://gitlab.com/riedproject
 
 - [PyTorch](https://pytorch.org/)
 - [TorchGeometric](https://pytorch-geometric.readthedocs.io/en/latest/)
